@@ -1,0 +1,15 @@
+.gameBoardContainer {
+  max-width: 90;
+  max-height: 90;
+  display: grid;
+  grid-template-columns: 30px 30px 30px;
+  grid-template-rows: 30px 30px 30px;
+}
+
+.box {
+  max-width: 30;
+  max-height: 30;
+  border: 1px;
+  border-style: solid;
+  border-color: black;
+}
