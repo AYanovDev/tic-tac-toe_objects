@@ -19,6 +19,7 @@ let gameBoard = (() => {
       checkForWins(column3);
       checkForWins(cross1);
       checkForWins(cross2);
+      checkForDraw();
       box.removeEventListener("click", pickEvent);
     }
     box.addEventListener("click", pickEvent);
@@ -31,16 +32,28 @@ let gameBoard = (() => {
   let column3 = [boxes[2], boxes[5], boxes[8]];
   let cross1 = [boxes[0], boxes[4], boxes[8]];
   let cross2 = [boxes[2], boxes[4], boxes[6]];
+  let field = Array.from(boxes);
+
+  let resultsDefined = false;
 
   function checkForWins(arrOfBoxes) {
     let content = arrOfBoxes.map((box) => box.textContent);
     let winner_x = content.every((i) => i === "x");
     let winner_o = content.every((i) => i === "o");
     if (winner_x) {
+      resultsDefined = true;
       setTimeout(() => alert("Player X won!"), 100);
     }
     if (winner_o) {
+      resultsDefined = true;
       setTimeout(() => alert("Player o won!"), 100);
+    }
+  }
+
+  function checkForDraw() {
+    let inBoxes = field.map((box) => box.textContent);
+    if (inBoxes.every((i) => i !== "") && !resultsDefined) {
+      setTimeout(() => alert("It's a draw!"), 100);
     }
   }
 })();
@@ -54,5 +67,3 @@ function createPlayer(symbol, isDrawing) {
 
 const player_x = createPlayer("x", true);
 const player_o = createPlayer("o", false);
-console.log(player_x);
-console.log(player_o);
